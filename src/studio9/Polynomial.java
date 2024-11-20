@@ -5,12 +5,14 @@ import java.util.LinkedList;
 public class Polynomial {
 	
 	private LinkedList<Double> list;
+	private int polynomial;
 
 	/**
 	 * Constructs a Polynomial with no terms yet.
 	 */
 	public Polynomial() {
 		//FIXME
+		this.list = new LinkedList<Double>();
 	}
 
 	
@@ -21,6 +23,7 @@ public class Polynomial {
 	 */
 	public void addTerm(double coeff) {
 		//FIXME
+		list.add(coeff);
 	}
 	
 	/*
@@ -29,21 +32,47 @@ public class Polynomial {
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
 	public String toString() {
-		return ""; //FIXME
+		 /* int largestExponent = list.size() - 1;
+		String polynomial =  list.get(0) + "x^" + largestExponent;
+		
+		for (int i=1; i<list.size(); i++) {
+			polynomial = polynomial + " + " + list.get(i) + "x^" + (largestExponent - i);
+		}
+		return polynomial;
 	}
 	
+	*/
+		return this.list.toString();
+	}
 	/**
 	 * 
 	 * @param x
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		return 0;//FIXME
+		int largestExponent = list.size() - 1;
+		double value = 0;
+		for (int i = 0; i<list.size();i++) {
+			value = (list.get(i) * (Math.pow(x,largestExponent))) + value;
+			largestExponent--;
+		}
+		return value;//FIXME
 	}
 
 	
 	public Polynomial derivative() {
-		return null;//FIXME
+		//FIXME
+		Polynomial derivative = new Polynomial();
+		int largestExponent = list.size() - 1;
+		double newCoeff = 0;
+
+		for (int i=0; i<list.size();i++) {
+			newCoeff = (largestExponent -i) * list.get(i);
+			if ((largestExponent -i) > 0) {
+				derivative.addTerm(newCoeff);
+		}
+		}
+		return derivative;
 	}
 	
 
